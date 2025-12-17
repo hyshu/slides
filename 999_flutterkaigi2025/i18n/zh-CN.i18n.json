@@ -1,0 +1,163 @@
+{
+  "slide01": {
+    "title": "Impeller带来了什么变化",
+    "subtitle": "FlutterKaigi 2025\naq (Hayami Shuhei)"
+  },
+  "slide02": {
+    "title": "前言",
+    "items": [
+      "本次演讲分为两部分",
+      "第一部分介绍易于理解的变化，\n第二部分结合术语说明变化"
+    ]
+  },
+  "slide03": {
+    "section": "第一部分",
+    "title": "Impeller\n带来了什么变化"
+  },
+  "slide04": {
+    "title": "第一点"
+  },
+  "slide05": {
+    "title": "自定义着色器"
+  },
+  "slide06": {
+    "title": "在Impeller之前也可以使用自定义着色器，\n但中间代码减少后速度更快\n表现力也增强了"
+  },
+  "slide07": {
+    "title": "第二点"
+  },
+  "slide09": {
+    "title": "No Flutter GPU Dashmaru"
+  },
+  "slide11": {
+    "buttonText": "Hello!"
+  },
+  "slide11_5": {
+    "title": "Flutter GPU is CustomPainter",
+    "panel1": "狗（旋转）",
+    "panel2": "狗（dough）"
+  },
+  "slide12": {
+    "title": "第一部分 完"
+  },
+  "slide13": {
+    "metal": "Metal?",
+    "vulkan": "Vulkan?",
+    "opengl": "OpenGL?",
+    "shader": "Shader?",
+    "question": "Metal和Impeller\n是渲染引擎吗？"
+  },
+  "slide14": {
+    "section": "第二部分",
+    "title": "图形API与\n渲染引擎"
+  },
+  "slide15": {
+    "apis": "Metal\nVulkan\nOpenGL",
+    "title": "<u>Graphics API</u>",
+    "description": "\n操作系统公开的API，\n用于在应用中使用3D渲染功能"
+  },
+  "slide16": {
+    "openglYear": "（1992年）",
+    "openglDesc": [
+      "为了统一操作系统间的API规范而创建"
+    ],
+    "metalYear": "   Metal（2014年）",
+    "metalDesc": [
+      "Apple独自制定的Apple产品专用图形API"
+    ],
+    "vulkanYear": "（2016年）",
+    "vulkanDesc": [
+      "OpenGL的后继者。放弃兼容性，全新规范，性能提升",
+      "由于Apple转向Metal，主要在Android和Linux上使用"
+    ]
+  },
+  "slide17": {
+    "title": "图形API能做什么",
+    "description": "仅限2D绘制的话，主要功能只有一个",
+    "step1": "1. 在坐标上放置点",
+    "step2": "2. 连接点形成面",
+    "step3": "3. 绘制",
+    "shaderNote": "这个绘制使用<b>着色器</b>"
+  },
+  "slide18": {
+    "title": "CPU",
+    "description": "计算机的大脑（智能手机约8〜16核）",
+    "cores": "16个优秀的大脑"
+  },
+  "slide19": {
+    "title": "对每个坐标（像素）执行一次方法来决定颜色"
+  },
+  "slide20": {
+    "title": "GPU",
+    "description": "专注于图形的大脑（智能手机有数百到数千个）",
+    "cores": "数千个小大脑"
+  },
+  "slide20_5": {
+    "title": "GPU单个核心的性能非常低...",
+    "request": "GPU Dashmaru君，\n执行这个Dart！",
+    "arrow": "→",
+    "refuse": "做不到...",
+    "restart": "手机强制重启",
+    "writeShader": "用\n<b>GPU专用语言\n（着色器语言）</b>\n编写方法",
+    "compile": "编译\n（优化）",
+    "shader": "<b>着色器</b>\n（执行所需的最小数据）",
+    "ok": "<b>这样就OK了！</b>"
+  },
+  "slide20_6": {
+    "title": "图形API篇 完"
+  },
+  "slide21": {
+    "engines": "Skia\nImpeller",
+    "title": "2D渲染引擎",
+    "description": "\n根据操作系统切换使用Graphics API，\n实现高速2D绘制的库"
+  },
+  "slide22": {
+    "title": "2D渲染引擎能做的事情也很简单"
+  },
+  "slide23": {
+    "title": "Skia",
+    "items": [
+      "Skia公司创建的2D渲染引擎，\n2005年被Google收购并作为OSS公开\n",
+      "作为超通用的2D渲染引擎，\n不仅用于Flutter、Chrome、Android OS，\n还用于Compose Multiplatform、React Native、\nFirefox等"
+    ]
+  },
+  "slide24": {
+    "title": "Metal出现带来的问题",
+    "items": [
+      "Metal是Apple从OS到硬件都自己制造的公司\n创建的，推荐提前编译\n即时编译不会被缓存，\n<b>每次启动应用都会编译</b>",
+      "因此Skia在首次绘制时会发生0.1～0.3秒的\n编译（着色器卡顿）",
+      "作为对策，Skia Graphite正在开发中（2021年〜）"
+    ]
+  },
+  "slide25": {
+    "title": "在Flutter中使用的限制",
+    "items": [
+      "Skia由Google内部的专门部门开发，难以进行Flutter专用的优化",
+      "Skia的GitHub仓库超过77000次提交，与Flutter同等规模"
+    ]
+  },
+  "slide26": {
+    "title": "Impeller",
+    "items": [
+      "为Flutter优化的专用2D渲染引擎",
+      "通过提前编译方式消除着色器卡顿",
+      "代码量大幅减少",
+      "现在直接在Flutter仓库内管理，\n开发更加便利"
+    ]
+  },
+  "slide27": {
+    "title": "Impeller带来了什么变化",
+    "items": [
+      "使用自定义着色器实现Liquid Glass Renderer\n等新表现",
+      "通过Flutter GPU可以进行3D渲染",
+      "通过提前编译方式消除着色器卡顿",
+      "与Flutter同一团队和仓库，\n开发更加便利"
+    ]
+  },
+  "slide28": {
+    "title": "感谢您的聆听",
+    "thanks1": "<b>感谢FlutterKaigi团队\n允许我们使用Dashmaru</b>",
+    "thanks2": "<b>And thank you, my fluttergpumate Smit Mehta!</b>",
+    "twitter": " X: @aqhayami"
+  }
+}

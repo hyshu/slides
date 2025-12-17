@@ -1,0 +1,163 @@
+{
+  "slide01": {
+    "title": "What Changed with Impeller",
+    "subtitle": "FlutterKaigi 2025\naq (Hayami Shuhei)"
+  },
+  "slide02": {
+    "title": "Introduction",
+    "items": [
+      "This session consists of two parts",
+      "Part 1 covers easy-to-understand changes,\nPart 2 explains changes with terminology"
+    ]
+  },
+  "slide03": {
+    "section": "Part 1",
+    "title": "What Changed\nwith Impeller"
+  },
+  "slide04": {
+    "title": "First"
+  },
+  "slide05": {
+    "title": "Custom Shaders"
+  },
+  "slide06": {
+    "title": "Custom shaders were available before Impeller,\nbut intermediate code was reduced for faster performance\nand expanded range of expression"
+  },
+  "slide07": {
+    "title": "Second"
+  },
+  "slide09": {
+    "title": "No Flutter GPU Dashmaru"
+  },
+  "slide11": {
+    "buttonText": "Hello!"
+  },
+  "slide11_5": {
+    "title": "Flutter GPU is CustomPainter",
+    "panel1": "Dog (rotation)",
+    "panel2": "Dog (dough)"
+  },
+  "slide12": {
+    "title": "End of Part 1"
+  },
+  "slide13": {
+    "metal": "Metal?",
+    "vulkan": "Vulkan?",
+    "opengl": "OpenGL?",
+    "shader": "Shader?",
+    "question": "Are Metal and Impeller\nrendering engines?"
+  },
+  "slide14": {
+    "section": "Part 2",
+    "title": "Graphics API\nand\nRendering Engine"
+  },
+  "slide15": {
+    "apis": "Metal\nVulkan\nOpenGL",
+    "title": "<u>Graphics API</u>",
+    "description": "\nAPIs provided by the OS to enable\n3D rendering capabilities in apps"
+  },
+  "slide16": {
+    "openglYear": " (1992)",
+    "openglDesc": [
+      "Created to standardize API specifications across operating systems"
+    ],
+    "metalYear": "   Metal (2014)",
+    "metalDesc": [
+      "Apple's proprietary graphics API exclusively for Apple products"
+    ],
+    "vulkanYear": " (2016)",
+    "vulkanDesc": [
+      "Successor to OpenGL. Breaking compatibility for a fresh spec with improved performance",
+      "Mainly used on Android and Linux since Apple moved to Metal"
+    ]
+  },
+  "slide17": {
+    "title": "What Graphics APIs Can Do",
+    "description": "For 2D drawing, there's only one main function",
+    "step1": "1. Place points\non coordinates",
+    "step2": "2. Connect points\nto form surfaces",
+    "step3": "3. Draw",
+    "shaderNote": "This drawing uses <b>shaders</b>"
+  },
+  "slide18": {
+    "title": "CPU",
+    "description": "The brain of the computer\n(a phone with 8–16 cores is common)",
+    "cores": "16 excellent brains"
+  },
+  "slide19": {
+    "title": "Execute a method once for each coordinate (pixel) to determine the color"
+  },
+  "slide20": {
+    "title": "GPU",
+    "description": "Brains specialized for graphics (hundreds to thousands on smartphones)",
+    "cores": "Thousands of tiny brains"
+  },
+  "slide20_5": {
+    "title": "A single GPU core has very low performance...",
+    "request": "GPU Dashmaru,\nexecute this Dart!",
+    "arrow": "→",
+    "refuse": "I can't...",
+    "restart": "The GPU hangup,\ncausing phone force restarts",
+    "writeShader": "Write the method in\n<b>GPU-specific language\n(shader language)</b>",
+    "compile": "Compile\n(optimize)",
+    "shader": "<b>Shader</b>\n(minimum binary for execution)",
+    "ok": "<b>Okay!</b>"
+  },
+  "slide20_6": {
+    "title": "End of Graphics API Section"
+  },
+  "slide21": {
+    "engines": "Skia\nImpeller",
+    "title": "2D Rendering Engine",
+    "description": "\nA library that achieves fast 2D drawing\nby switching Graphics APIs based on the OS"
+  },
+  "slide22": {
+    "title": "What a 2D rendering engine can do:"
+  },
+  "slide23": {
+    "title": "Skia",
+    "items": [
+      "A 2D rendering engine created by Skia Inc.,\nacquired by Google in 2005 and released as OSS\n",
+      "Used as a highly versatile 2D rendering engine in\nFlutter, Chrome, Android OS, as well as\nCompose Multiplatform, React Native,\nFirefox, and more"
+    ]
+  },
+  "slide24": {
+    "title": "Problems with Metal's Introduction",
+    "items": [
+      "Since Metal was created by Apple who makes\neverything from OS to hardware, ahead-of-time compilation is recommended\nJust-in-time compilation isn't cached,\n<b>causing compilation every time the app launches</b>",
+      "So Skia has 0.1-0.3 seconds of compilation\non first draw (shader jank)",
+      "Skia Graphite is a solution (development 2021-)"
+    ]
+  },
+  "slide25": {
+    "title": "Limitations of Using with Flutter",
+    "items": [
+      "Skia is developed by a specialized team within Google, making Flutter-specific optimizations difficult",
+      "Skia's GitHub repository has over 77,000 commits, on par with Flutter"
+    ]
+  },
+  "slide26": {
+    "title": "Impeller",
+    "items": [
+      "A dedicated 2D rendering engine optimized for Flutter",
+      "Eliminated shader jank with ahead-of-time compilation",
+      "Significantly reduced code volume",
+      "Now directly managed within Flutter's repository,\nmaking development easier"
+    ]
+  },
+  "slide27": {
+    "title": "What Changed with Impeller",
+    "items": [
+      "New expressions like Liquid Glass Renderer\nwith custom shaders",
+      "3D rendering now possible with Flutter GPU",
+      "Eliminated shader jank with ahead-of-time compilation",
+      "Same team & repository as Flutter,\nmaking development easier"
+    ]
+  },
+  "slide28": {
+    "title": "Thank you for listening",
+    "thanks1": "<b>Special thanks to the FlutterKaigi team\nfor allowing us to use Dashmaru</b>",
+    "thanks2": "<b>And thank you, my fluttergpumate Smit Mehta!</b>",
+    "twitter": " X: @aqhayami"
+  }
+}

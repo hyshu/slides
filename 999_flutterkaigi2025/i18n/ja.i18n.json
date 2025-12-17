@@ -1,0 +1,159 @@
+{
+  "slide01": {
+    "title": "Impellerで何が変わったのか",
+    "subtitle": "FlutterKaigi 2025\naq (Hayami Shuhei)"
+  },
+  "slide02": {
+    "title": "はじめに",
+    "items": [
+      "本セッションは二部構成です",
+      "第一部は分かりやすい変化、\n第二部で用語説明を交えた変化"
+    ]
+  },
+  "slide03": {
+    "section": "第一部",
+    "title": "Impellerで\n何が変わったのか"
+  },
+  "slide04": {
+    "title": "1つ目"
+  },
+  "slide05": {
+    "title": "カスタムシェーダー"
+  },
+  "slide06": {
+    "title": "Impeller以前でもカスタムシェーダーが使えたが、\n中間コードが削減されて高速化\n表現の幅が増えた"
+  },
+  "slide07": {
+    "title": "2つ目"
+  },
+  "slide09": {
+    "title": "No Flutter GPU だしゅまる"
+  },
+  "slide11": {
+    "buttonText": "Hello!"
+  },
+  "slide11_5": {
+    "title": "Flutter GPU is CustomPainter",
+    "panel1": "犬 (回転)",
+    "panel2": "犬 (dough)"
+  },
+  "slide12": {
+    "title": "第一部　完"
+  },
+  "slide13": {
+    "metal": "Metal?",
+    "vulkan": "Vulkan?",
+    "opengl": "OpenGL?",
+    "shader": "シェーダー?",
+    "question": "MetalとImpellerって\n描画エンジンなの？"
+  },
+  "slide14": {
+    "section": "第二部",
+    "title": "グラフィックスAPIと\nレンダリングエンジン"
+  },
+  "slide15": {
+    "apis": "Metal\nVulkan\nOpenGL",
+    "title": "<u>Graphics API</u>",
+    "description": "\n3Dレンダリング機能をアプリ内で使えるように\nOSが公開しているAPI"
+  },
+  "slide16": {
+    "openglYear": " (1992年)",
+    "openglDesc": ["OS間のAPI仕様を共通化するために作られた"],
+    "metalYear": "   Metal (2014年)",
+    "metalDesc": ["Appleが独自に策定したApple製品専用グラフィックスAPI"],
+    "vulkanYear": " (2016年)",
+    "vulkanDesc": [
+      "OpenGLの後続。互換性を切って仕様を一新。パフォーマンスが向上した",
+      "AppleがMetalに移行したので主にAndroidとLinuxで使われている"
+    ]
+  },
+  "slide17": {
+    "title": "グラフィックスAPIが出来ること",
+    "description": "2D描画に限るとメイン機能は一つだけ",
+    "step1": "1. 座標上に点を置く",
+    "step2": "2. 点をつないで面にする",
+    "step3": "3. 描画",
+    "shaderNote": "この描画に <b>シェーダー</b> を用いる"
+  },
+  "slide18": {
+    "title": "CPU",
+    "description": "コンピューターの頭脳（スマホの場合8〜16コア程度)",
+    "cores": "16の優秀な頭脳たち"
+  },
+  "slide19": {
+    "title": "全ての座標(ピクセル)に一回ずつメソッドを実行して色を決める"
+  },
+  "slide20": {
+    "title": "GPU",
+    "description": "グラフィックスに特化した頭脳(スマホの場合数百〜数千個)",
+    "cores": "数千個の小さな頭脳たち"
+  },
+  "slide20_5": {
+    "title": "GPUの一つのコアの性能は非常に低い…",
+    "request": "GPUだしゅまるくん、\nこのDartを実行して！",
+    "arrow": "→",
+    "refuse": "無理です…",
+    "restart": "スマホが強制再起動する",
+    "writeShader": "メソッドを\n<b>GPU専用言語\n(シェーダー言語)</b>\nで書く",
+    "compile": "コンパイル\n(最適化)",
+    "shader": "<b>シェーダー</b>\n(実行に必要な最小限のデータ)",
+    "ok": "<b>これならOK！</b>"
+  },
+  "slide20_6": {
+    "title": "グラフィックスAPI編　完"
+  },
+  "slide21": {
+    "engines": "Skia\nImpeller",
+    "title": "2D描画エンジン",
+    "description": "\nOSに応じて Graphics API を使い分けつつ\n高速な2D描画を実現するライブラリー"
+  },
+  "slide22": {
+    "title": "2D描画エンジンも出来ることはシンプル"
+  },
+  "slide23": {
+    "title": "Skia",
+    "items": [
+      "Skia社が作っていた2D描画エンジンをGoogle\nが2005年に買収、OSSとして公開したもの\n",
+      "超汎用的な2D描画エンジンとして\nFlutter, Chrome, Android OSのみならず、\nCompose Multiplatform, React Native,\nFirefox 等でも使われている"
+    ]
+  },
+  "slide24": {
+    "title": "Metal登場に伴う問題",
+    "items": [
+      "MetalはOSからハードまで自社製のApple社が\n作ったものなので、事前コンパイル推奨\n事後コンパイルはキャッシュがされず、\n<b>アプリを起動するたびにコンパイルされてしまう</b>",
+      "なのでSkiaでは初回描画に0.1～0.3秒の\nコンパイルが発生する（シェーダージャンク）",
+      "対策版として Skia Graphite 開発中 (2021年〜)"
+    ]
+  },
+  "slide25": {
+    "title": "Flutterでの利用の限界",
+    "items": [
+      "SkiaはGoogle社内の専門の部署で開発が行われているため、Flutter向けの最適化が行いづらい",
+      "SkiaのGitHubリポジトリーは7万7000コミット超えでFlutterと同水準"
+    ]
+  },
+  "slide26": {
+    "title": "Impeller",
+    "items": [
+      "Flutter向けに最適化された専用の2D描画エンジン",
+      "事前コンパイル方式でシェーダージャンク解消",
+      "コード量が大幅に削減された",
+      "Flutterのリポジトリー内で直接管理されるように\nなり、開発が行いやすくなった"
+    ]
+  },
+  "slide27": {
+    "title": "Impellerで何が変わったのか",
+    "items": [
+      "カスタムシェーダーでLiquid Glass Renderer\nなどの新しい表現",
+      "Flutter GPU で3Dも描画可能に",
+      "事前コンパイル方式でシェーダージャンク解消",
+      "Flutterと同じチーム&リポジトリになり\n開発がしやすくなった"
+    ]
+  },
+  "slide28": {
+    "title": "ご清聴ありがとうございました",
+    "thanks1": "<b>だしゅまる君の利用をご快諾くださった\nFlutterKaigiチームの皆様にお礼申し上げます</b>",
+    "thanks2": "<b>And thank you, my fluttergpumate Smit Mehta!</b>",
+    "twitter": " X: @aqhayami"
+  }
+}

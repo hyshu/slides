@@ -1,0 +1,163 @@
+{
+  "slide01": {
+    "title": "Impeller로 무엇이 바뀌었는가",
+    "subtitle": "FlutterKaigi 2025\naq (Hayami Shuhei)"
+  },
+  "slide02": {
+    "title": "시작하며",
+    "items": [
+      "이 세션은 두 부분으로 구성되어 있습니다",
+      "1부는 이해하기 쉬운 변화,\n2부는 용어 설명과 함께 변화를 설명합니다"
+    ]
+  },
+  "slide03": {
+    "section": "1부",
+    "title": "Impeller로\n무엇이 바뀌었는가"
+  },
+  "slide04": {
+    "title": "첫 번째"
+  },
+  "slide05": {
+    "title": "커스텀 셰이더"
+  },
+  "slide06": {
+    "title": "Impeller 이전에도 커스텀 셰이더를 사용할 수 있었지만,\n중간 코드가 줄어들어 속도가 빨라지고\n표현의 폭이 넓어졌습니다"
+  },
+  "slide07": {
+    "title": "두 번째"
+  },
+  "slide09": {
+    "title": "No Flutter GPU Dashmaru"
+  },
+  "slide11": {
+    "buttonText": "Hello!"
+  },
+  "slide11_5": {
+    "title": "Flutter GPU is CustomPainter",
+    "panel1": "개 (회전)",
+    "panel2": "개 (dough)"
+  },
+  "slide12": {
+    "title": "1부 끝"
+  },
+  "slide13": {
+    "metal": "Metal?",
+    "vulkan": "Vulkan?",
+    "opengl": "OpenGL?",
+    "shader": "Shader?",
+    "question": "Metal과 Impeller는\n렌더링 엔진인가요?"
+  },
+  "slide14": {
+    "section": "2부",
+    "title": "Graphics API와\n렌더링 엔진"
+  },
+  "slide15": {
+    "apis": "Metal\nVulkan\nOpenGL",
+    "title": "<u>Graphics API</u>",
+    "description": "\n앱에서 3D 렌더링 기능을 사용할 수 있도록\nOS가 공개한 API"
+  },
+  "slide16": {
+    "openglYear": " (1992년)",
+    "openglDesc": [
+      "OS 간 API 사양을 통일하기 위해 만들어졌습니다"
+    ],
+    "metalYear": "   Metal (2014년)",
+    "metalDesc": [
+      "Apple이 독자적으로 제정한 Apple 제품 전용 그래픽스 API"
+    ],
+    "vulkanYear": " (2016년)",
+    "vulkanDesc": [
+      "OpenGL의 후속. 호환성을 버리고 사양을 새롭게 하여 성능이 향상되었습니다",
+      "Apple이 Metal로 전환하여 주로 Android와 Linux에서 사용됩니다"
+    ]
+  },
+  "slide17": {
+    "title": "그래픽스 API가 할 수 있는 것",
+    "description": "2D 그리기에 한정하면 메인 기능은 하나뿐",
+    "step1": "1. 좌표에 점을 배치",
+    "step2": "2. 점을 연결하여 면 생성",
+    "step3": "3. 그리기",
+    "shaderNote": "이 그리기에 <b>셰이더</b>를 사용합니다"
+  },
+  "slide18": {
+    "title": "CPU",
+    "description": "컴퓨터의 두뇌 (스마트폰의 경우 8~16코어 정도)",
+    "cores": "16개의 우수한 두뇌들"
+  },
+  "slide19": {
+    "title": "모든 좌표(픽셀)에 한 번씩 메서드를 실행하여 색상을 결정합니다"
+  },
+  "slide20": {
+    "title": "GPU",
+    "description": "그래픽에 특화된 두뇌 (스마트폰의 경우 수백~수천 개)",
+    "cores": "수천 개의 작은 두뇌들"
+  },
+  "slide20_5": {
+    "title": "GPU 하나의 코어 성능은 매우 낮습니다...",
+    "request": "GPU Dashmaru군,\n이 Dart를 실행해줘!",
+    "arrow": "→",
+    "refuse": "무리예요...",
+    "restart": "스마트폰이 강제 재시작됩니다",
+    "writeShader": "메서드를\n<b>GPU 전용 언어\n(셰이더 언어)</b>로\n작성합니다",
+    "compile": "컴파일\n(최적화)",
+    "shader": "<b>셰이더</b>\n(실행에 필요한 최소한의 데이터)",
+    "ok": "<b>이러면 OK!</b>"
+  },
+  "slide20_6": {
+    "title": "그래픽스 API편 끝"
+  },
+  "slide21": {
+    "engines": "Skia\nImpeller",
+    "title": "2D 렌더링 엔진",
+    "description": "\nOS에 따라 Graphics API를 전환하면서\n고속 2D 그리기를 실현하는 라이브러리"
+  },
+  "slide22": {
+    "title": "2D 렌더링 엔진이 할 수 있는 것도 간단합니다"
+  },
+  "slide23": {
+    "title": "Skia",
+    "items": [
+      "Skia사가 만들었던 2D 렌더링 엔진을 Google이\n2005년에 인수하여 OSS로 공개한 것\n",
+      "초범용적인 2D 렌더링 엔진으로\nFlutter, Chrome, Android OS뿐만 아니라\nCompose Multiplatform, React Native,\nFirefox 등에서도 사용됩니다"
+    ]
+  },
+  "slide24": {
+    "title": "Metal 등장에 따른 문제",
+    "items": [
+      "Metal은 OS부터 하드웨어까지 자사 제품인 Apple이\n만든 것이므로 사전 컴파일 권장\n사후 컴파일은 캐시되지 않아\n<b>앱을 시작할 때마다 컴파일됩니다</b>",
+      "그래서 Skia에서는 첫 그리기에 0.1~0.3초의\n컴파일이 발생합니다 (셰이더 잰크)",
+      "대책으로 Skia Graphite 개발 중 (2021년~)"
+    ]
+  },
+  "slide25": {
+    "title": "Flutter에서의 사용 한계",
+    "items": [
+      "Skia는 Google 내부의 전문 부서에서 개발되어 Flutter용 최적화가 어렵습니다",
+      "Skia의 GitHub 저장소는 77,000 커밋 이상으로 Flutter와 동등한 수준입니다"
+    ]
+  },
+  "slide26": {
+    "title": "Impeller",
+    "items": [
+      "Flutter용으로 최적화된 전용 2D 렌더링 엔진",
+      "사전 컴파일 방식으로 셰이더 잰크 해소",
+      "코드량이 대폭 감소",
+      "Flutter 저장소 내에서 직접 관리되어\n개발이 용이해졌습니다"
+    ]
+  },
+  "slide27": {
+    "title": "Impeller로 무엇이 바뀌었는가",
+    "items": [
+      "커스텀 셰이더로 Liquid Glass Renderer\n등 새로운 표현",
+      "Flutter GPU로 3D도 그릴 수 있게 됨",
+      "사전 컴파일 방식으로 셰이더 잰크 해소",
+      "Flutter와 같은 팀 & 저장소가 되어\n개발이 용이해졌습니다"
+    ]
+  },
+  "slide28": {
+    "title": "경청해 주셔서 감사합니다",
+    "thanks1": "<b>Dashmaru 사용을 허락해 주신\nFlutterKaigi 팀 여러분께 감사드립니다</b>",
+    "thanks2": "<b>And thank you, my fluttergpumate Smit Mehta!</b>",
+    "twitter": " X: @aqhayami"
+  }
+}
